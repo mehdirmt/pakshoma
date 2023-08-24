@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,9 @@ Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('adm
 Route::get ('/logout'      , [AuthController::class, 'logout'      ])->name('admin.logout');
 
 Route::prefix('dashboard')->middleware('auth:admin')->group(function () {
-    Route::get('/', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get ('/'               , [DashboardController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get ('/products'       , [ProductController::class  , 'index'    ])->name('admin.products.index');
+    Route::get ('/products/create', [ProductController::class  , 'create'   ])->name('admin.products.create');
+    Route::post('/products'       , [ProductController::class  , 'store'    ])->name('admin.products.store');
 });
 
