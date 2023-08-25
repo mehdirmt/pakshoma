@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,5 +21,8 @@ Route::prefix('dashboard')->middleware('auth:admin')->group(function () {
     Route::get ('/products'       , [ProductController::class  , 'index'    ])->name('admin.products.index');
     Route::get ('/products/create', [ProductController::class  , 'create'   ])->name('admin.products.create');
     Route::post('/products'       , [ProductController::class  , 'store'    ])->name('admin.products.store');
+    Route::get ('/plans'          , [PlanController::class     , 'index'    ])->name('admin.plans.index');
+    Route::get ('/plans/create'   , [PlanController::class     , 'create'   ])->name('admin.plans.create');
+    Route::post('/plans'          , [PlanController::class     , 'store'    ])->name('admin.plans.store');
 });
 
