@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\PlanTypes;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Plan\CreatePlanRequest;
 use App\Models\Plan;
+use App\Models\SellType;
 use Exception;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class PlanController extends Controller
@@ -16,14 +15,14 @@ class PlanController extends Controller
     public function index(): View
     {
         return view('admin.plan.index', [
-            'plans' => Plan::all()
+            'plans' => Plan::with('sellType')->get()
         ]);
     }
 
     public function create(): View
     {
         return view('admin.plan.create', [
-            'planTypes' => PlanTypes::cases()
+            'sellTypes' => SellType::all()
         ]);
     }
 
@@ -32,9 +31,11 @@ class PlanController extends Controller
         $validated = $request->validated();
         try {
             $plan = new Plan();
-            $plan->title  = $validated['title'];
-            $plan->type   = $validated['type'];
-            $plan->factor = $validated['factor'];
+            $plan->title        = $validated['title'];
+            $plan->sell_type_id = $validated['type'];
+            $plan->percent      = $validated['percent'];
+            $plan->start_date   = $validated['start_date'];
+            $plan->end_date     = $validated['end_date'];
             $plan->save();
             $route = 'admin.plans.index';
             $flash = [

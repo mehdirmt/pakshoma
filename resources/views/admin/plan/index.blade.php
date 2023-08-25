@@ -1,4 +1,4 @@
-<h1>products list</h1>
+<h1>plans list</h1>
 
 @if(session()->has('flash_message'))
     <p>{{ session('flash_message')['message'] }}</p>
@@ -12,7 +12,9 @@
         <th>#</th>
         <th>title</th>
         <th>type</th>
-        <th>factor</th>
+        <th>percent</th>
+        <th>start date</th>
+        <th>end date</th>
     </tr>
     </thead>
     <tbody>
@@ -20,8 +22,10 @@
         <tr>
             <td>{{ $loop->iteration }}</td>
             <td>{{ $plan->title }}</td>
-            <td>{{ $plan->type }}</td>
-            <td>{{ $plan->factor }}</td>
+            <td>{{ $plan->sellType->title }}</td>
+            <td>{{ $plan->percent }}</td>
+            <td>{{ $plan->start_date }}</td>
+            <td>{{ $plan->end_date }}</td>
         </tr>
     @endforeach
     </tbody>

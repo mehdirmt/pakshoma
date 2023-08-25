@@ -18,9 +18,10 @@ class PlanFactory extends Factory
     public function definition(): array
     {
         return [
-            'title'  => fake()->sentence(),
-            'type'   => fake()->randomElement(PlanTypes::class),
-            'factor' => fake()->numberBetween(0, 40)
+            'title'      => fake()->sentence(),
+            'percent'    => fake()->numberBetween(0, 40),
+            'start_date' => fake()->date('Y-m-d', '+1 week'),
+            'end_date'   => fake()->date('Y-m-d', '+1 month')
         ];
     }
 }
