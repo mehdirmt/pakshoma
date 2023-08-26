@@ -15,5 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get ('/'        , [IndexController::class, 'index'    ])->name('index');
-Route::post('/cart/add', [CartController::class , 'addToCart'])->name('addToCart');
+Route::get ('/'         , [IndexController::class, 'index'         ])->name('index');
+Route::post('/cart/add' , [CartController::class , 'addToCart'     ])->name('addToCart');
+Route::get ('/cart'     , [CartController::class , 'index'         ])->name('cart.index');
+Route::post('/cart/calc', [CartController::class , 'calcTotalPrice'])->name('cart.calcTotalPrice');
