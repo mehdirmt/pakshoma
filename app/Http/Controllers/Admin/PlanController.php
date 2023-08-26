@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Plan\CreatePlanRequest;
+use App\Http\Requests\CreatePlanRequest;
 use App\Models\Plan;
 use App\Models\SellType;
 use Exception;

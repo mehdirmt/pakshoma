@@ -34,18 +34,15 @@ class CartController extends Controller
 
     public function addToCart(AddProductToCartRequest $request): JsonResponse
     {
-        $productId = $request->input('product_id');
+        $validated = $request->validated();
 
-        // check if product exist
-        Product::findOrFail($productId);
-
-        if (!in_array($productId, Session::get('cart', []))) {
-            Session::push('cart', $productId);
+        if (!in_array($validated['product_id'], Session::get('cart', []))) {
+            Session::push('cart', $validated['product_id']);
         }
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'add to cart success ' . $productId
+            'message' => 'add to cart success'
         ]);
     }
 

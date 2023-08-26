@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Product\CreateProductRequest;
 use App\Http\Requests\Admin\Product\UpdateProductRequest;
+use App\Http\Requests\CreateProductRequest;
 use App\Models\Product;
 use Exception;
 use Illuminate\Http\RedirectResponse;

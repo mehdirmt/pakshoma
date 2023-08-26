@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Product;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AddProductToCartRequest extends FormRequest
@@ -22,7 +23,7 @@ class AddProductToCartRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'product_id' => ['required', 'integer']
+            'product_id' => ['required', 'integer', sprintf('exists:%s,id', Product::class)]
         ];
     }
 }
