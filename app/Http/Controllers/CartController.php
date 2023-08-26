@@ -21,7 +21,7 @@ class CartController extends Controller
 
     public function index(): View
     {
-        $productsIds = Session::get('cart');
+        $productsIds = Session::get('cart', []);
 
         $products = Product::whereIn('id', $productsIds)->get();
 

@@ -1,51 +1,59 @@
-<h1>create plan</h1>
+@extends('layout')
 
-@if(session()->has('flash_message'))
-    <p>{{ session('flash_message')['message'] }}</p>
-@endif
+@section('content')
+    <h1 class="text-center">Create Plan Page</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <form method="POST" action="{{ route('admin.plans.store') }}">
+                @csrf
 
-<form method="POST" action="{{ route('admin.plans.store') }}">
-    @csrf
+                <div class="form-group">
+                    <label for="title">title:</label>
+                    <input type="text" id="title" name="title" class="form-control">
+                    @error('title')
+                    <span>{{ $message }}</span>
+                    @enderror
+                </div>
 
-    <label for="title">title:</label>
-    <input type="text" id="title" name="title">
-    @error('title')
-        <span>{{ $message }}</span>
-    @enderror
-    <br>
+                <div class="form-group">
+                    <label for="type">type:</label>
+                    <select id="type" name="type" class="form-control">
+                        <option value="">select</option>
+                        @foreach($sellTypes as $type)
+                            <option value="{{ $type->id }}">{{ $type->title }}</option>
+                        @endforeach
+                    </select>
+                    @error('type')
+                    <span>{{ $message }}</span>
+                    @enderror
+                </div>
 
-    <label for="type">type:</label>
-    <select id="type" name="type">
-        <option value="">select</option>
-        @foreach($sellTypes as $type)
-            <option value="{{ $type->id }}">{{ $type->title }}</option>
-        @endforeach
-    </select>
-    @error('type')
-        <span>{{ $message }}</span>
-    @enderror
-    <br>
+                <div class="form-group">
+                    <label for="percent">percent</label>
+                    <input type="number" id="percent" name="percent" min="0" class="form-control">
+                    @error('percent')
+                    <span>{{ $message }}</span>
+                    @enderror
+                </div>
 
-    <label for="percent">percent</label>
-    <input type="number" id="percent" name="percent" min="0">
-    @error('percent')
-        <span>{{ $message }}</span>
-    @enderror
-    <br>
+                <div class="form-group">
+                <label for="start_date">start date</label>
+                <input type="date" id="start_date" name="start_date" class="form-control">
+                @error('start_date')
+                <span>{{ $message }}</span>
+                @enderror
+                </div>
 
-    <label for="start_date">start date</label>
-    <input type="date" id="start_date" name="start_date">
-    @error('start_date')
-        <span>{{ $message }}</span>
-    @enderror
-    <br>
+                <div class="form-group">
+                <label for="end_date">end date</label>
+                <input type="date" id="end_date" name="end_date" class="form-control">
+                @error('end_date')
+                <span>{{ $message }}</span>
+                @enderror
+                </div>
 
-    <label for="end_date">end date</label>
-    <input type="date" id="end_date" name="end_date">
-    @error('end_date')
-        <span>{{ $message }}</span>
-    @enderror
-    <br>
-
-    <button type="submit">submit</button>
-</form>
+                <button type="submit" class="btn btn-primary">submit</button>
+            </form>
+        </div>
+    </div>
+@endsection

@@ -1,32 +1,38 @@
-<h1>create product page</h1>
+@extends('layout')
 
-@if(session()->has('flash_message'))
-    <p>{{ session('flash_message')['message'] }}</p>
-@endif
+@section('content')
+    <div class="row my-5">
+        <div class="col-md-12">
+            <form method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
+                @csrf
 
-<form method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
-    @csrf
+                <div class="form-group">
+                <label for="name">name:</label>
+                <input type="text" id="name" name="name" class="form-control">
+                @error('name')
+                <span>{{ $message }}</span>
+                @enderror
+                </div>
 
-    <label for="name">name:</label>
-    <input type="text" id="name" name="name">
-    @error('name')
-        <span>{{ $message }}</span>
-    @enderror
-    <br>
+                <div class="form-group">
+                <label for="price">price:</label>
+                <input type="text" id="price" name="price" class="form-control">
+                @error('price')
+                <span>{{ $message }}</span>
+                @enderror
+                </div>
 
-    <label for="price">price:</label>
-    <input type="text" id="price" name="price">
-    @error('price')
-        <span>{{ $message }}</span>
-    @enderror
-    <br>
+                <div class="form-group">
+                <label for="image">image:</label>
+                    <br>
+                <input type="file" id="image" name="image">
+                @error('image')
+                <span>{{ $message }}</span>
+                @enderror
+                </div>
 
-    <label for="image">image:</label>
-    <input type="file" id="image" name="image">
-    @error('image')
-        <span>{{ $message }}</span>
-    @enderror
-    <br>
-
-    <button type="submit">submit</button>
-</form>
+                <button type="submit" class="btn btn-primary">submit</button>
+            </form>
+        </div>
+    </div>
+@endsection

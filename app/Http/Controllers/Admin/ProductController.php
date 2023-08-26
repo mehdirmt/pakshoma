@@ -12,15 +12,6 @@ use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-    public function index(): View
-    {
-        $products = Product::all();
-
-        return view('admin.product.index', [
-            'products' => $products
-        ]);
-    }
-
     public function create(): View
     {
         return view('admin.product.create');
@@ -40,7 +31,7 @@ class ProductController extends Controller
             $product->image = $imagePath;
             $product->save();
 
-            $route = 'admin.products.index';
+            $route = 'admin.dashboard';
             $flash = [
                 'type'    => 'success',
                 'message' => 'create new product success'

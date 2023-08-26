@@ -1,23 +1,29 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layout')
 
-    <title>{{ config('app.name') }}</title>
-</head>
-<body>
+@section('content')
+    <div class="row">
+        @foreach($products as $product)
+            <div class="col-md-4">
+                <div class="card my-2">
+                    <img class="card-img-top" src="{{ asset('storage') . '/' . $product->image }}" height="250"
+                         alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $product->name }}</h5>
+                        <p class="card-text">
+                            Some quick example text to build on the card title and make up the bulk
+                            of the card's content.
+                        </p>
+                        <button type="button" class="btn btn-sm btn-info btn-addToCart"
+                                data-productId="{{ $product->id }}">add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+@endsection
 
-    @foreach($products as $product)
-        <div>
-            <h4>{{ $product->name }}</h4>
-            <img src="{{ asset('storage') . '/' . $product->image }}" width="50" height="50">;
-            <h4>{{ $product->price }}</h4>
-            <button type="button" class="btn-addToCart" data-productId="{{ $product->id }}">add to cart</button>
-        </div>
-    @endforeach
-
-    <script src="{{ asset('/assets/js/jquery.min.js') }}"></script>
+@section('custom_scripts')
     <script>
         $('.btn-addToCart').on('click', function (event) {
             let productId = $(this).attr('data-productId');
@@ -35,10 +41,10 @@
                     alert('add product to cart success');
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus);
+                    alert('an error occurred');
                 }
             });
         });
     </script>
-</body>
-</html>
+@endsection
+

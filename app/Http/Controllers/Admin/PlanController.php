@@ -12,13 +12,6 @@ use Illuminate\View\View;
 
 class PlanController extends Controller
 {
-    public function index(): View
-    {
-        return view('admin.plan.index', [
-            'plans' => Plan::with('sellType')->get()
-        ]);
-    }
-
     public function create(): View
     {
         return view('admin.plan.create', [
@@ -37,7 +30,7 @@ class PlanController extends Controller
             $plan->start_date   = $validated['start_date'];
             $plan->end_date     = $validated['end_date'];
             $plan->save();
-            $route = 'admin.plans.index';
+            $route = 'admin.dashboard';
             $flash = [
                 'type'    => 'success',
                 'message' => 'store new plan success'
